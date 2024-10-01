@@ -1,0 +1,1 @@
+![rack](../resources/PXL_20240924_224932487.jpg)
