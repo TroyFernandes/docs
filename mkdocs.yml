@@ -1,4 +1,4 @@
-site_name: My Docs
+site_name: docs
 #site_url: https://mkdocs.example.com/
 
 docs_dir: docs
@@ -37,4 +37,10 @@ markdown_extensions:
 
 plugins:
   - search
-  - git-revision-date-localized
+  - git-revision-date-localized:
+      type: custom
+      custom_format: "%c"
+      timezone: America/Toronto
+      fallback_to_build_date: true
+      enable_creation_date: true
+      enable_git_follow: true
