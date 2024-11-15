@@ -1,0 +1,7 @@
+services:
+  mkdocs:
+    image: squidfunk/mkdocs-material
+    ports:
+      - "8005:8000"
+    volumes:
+      - ./docs:/docs
