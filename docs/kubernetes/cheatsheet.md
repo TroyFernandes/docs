@@ -1,4 +1,4 @@
-# Useful Commands
+# Cheatsheet
 
 ### Get all running namespaces
 `kubectl get svc --all-namespaces -o wide`
