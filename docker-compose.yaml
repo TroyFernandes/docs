@@ -1,6 +1,7 @@
 services:
   mkdocs:
     container_name: mkdocs-material
+    restart: unless-stopped
     build: .
     ports:
       - "8005:8000"
