@@ -46,3 +46,4 @@ plugins:
       enable_git_follow: true
   - drawio:
       viewer_js: "https://viewer.diagrams.net/js/viewer-static.min.js"
+  - glightbox

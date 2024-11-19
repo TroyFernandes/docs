@@ -6,3 +6,6 @@ RUN git config --global --add safe.directory /docs
 
 # Install mkdocs-drawio plugin
 RUN pip install mkdocs-drawio
+
+# Install mkdocs-glightbox plugin
+RUN pip install mkdocs-glightbox
