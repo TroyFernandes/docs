@@ -59,6 +59,6 @@ services:
 
 5. Add your netboot server under [Services] -> [ISC DHCPv4] -> [Interface] -> [TFTP server].
 
-![opnsense dhcp server](../resources/opnsense-netbootxyz-settings.png)
+![opnsense dhcp server](../resources/netbootxyz/opnsense-netbootxyz-settings.png)
 
 6. You should be able to now boot from the network

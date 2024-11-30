@@ -1,1 +1,1 @@
-![rack](../resources/PXL_20240924_224932487.jpg)
+![rack](../resources/homelab/PXL_20240924_224932487.jpg)

@@ -1,1 +1,1 @@
-![](../resources/Current.drawio)
+![](../resources/homelab/Current.drawio)
