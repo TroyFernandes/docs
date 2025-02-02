@@ -41,7 +41,7 @@ plugins:
       type: custom
       custom_format: "%c"
       timezone: America/Toronto
-      fallback_to_build_date: true
+      fallback_to_build_date: false
       enable_creation_date: true
       enable_git_follow: true
   - drawio:
