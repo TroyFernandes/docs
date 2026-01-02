@@ -6,8 +6,10 @@
       
       
       
-        <link rel="prev" href="../../software_dev_tools/gitea/gitea-server/">
+        <link rel="prev" href="../..">
       
+      
+        <link rel="next" href="../../arch_linux/recover_systemd-boot/">
       
       
         
@@ -18,7 +20,7 @@
     
     
       
-        <title>Snapshots - docs</title>
+        <title>Installing Ansible on Windows through WSL - docs</title>
       
     
     
@@ -79,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#snapshots" class="md-skip">
+        <a href="#installing-ansible-on-windows-through-wsl" class="md-skip">
           Skip to content
         </a>
       
@@ -115,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Snapshots
+              Installing Ansible on Windows through WSL
             
           </span>
         </div>
@@ -261,8 +263,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -272,13 +276,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -299,7 +301,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -314,10 +316,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../ansible/simple_setup/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -333,6 +344,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1297,8 +1309,6 @@
       
   
   
-    
-  
   
   
     
@@ -1310,11 +1320,13 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10">
         
           
           <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
@@ -1335,7 +1347,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1350,19 +1362,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../zfs/snapshots/" class="md-nav__link">
         
   
   
@@ -1378,7 +1381,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1455,7 +1457,7 @@
         <a href="./" class="md-path__link">
           
   <span class="md-ellipsis">
-    Zfs
+    Ansible
   </span>
 
         </a>
@@ -1474,74 +1476,42 @@
 
 
 
-<h1 id="snapshots">Snapshots</h1>
-<p>This will be a guide on how to leverage the features of ZFS and create snapshots of machines running ZFS.</p>
-<p>We'll then send them to another machine also running ZFS to have a backup.</p>
-<h1 id="resources">Resources</h1>
-<ul>
-<li><a href="https://www.howtoforge.com/tutorial/how-to-use-snapshots-clones-and-replication-in-zfs-on-linux">ZFS Snapshot Briefer</a></li>
-<li><a href="https://blog.yucas.net/2017/01/04/fast-zfs-send-with-netcat/">Fast ZFS Send with Netcat</a></li>
-</ul>
-<h1 id="requirements">Requirements</h1>
-<ul>
-<li>Two machines configured with ZFS</li>
-<li>If you want to browse the snapshots via SMB/NFS you'll need to create the share on TrueNAS. I made one called <code>zfs_snapshots</code></li>
-</ul>
-<p>I'll be using my laptop running <code>NixOS 24.05</code> with ZFS as the machine to backup. The backup server(target) will be a machine running <code>TrueNAS SCALE Dragonfish-24.04.2</code></p>
-<h1 id="how-to">How-To</h1>
-<ol>
-<li>View your zfs pools using <code>zpool list</code></li>
-</ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">[</span>troy@nixos:~<span class="o">]</span>$<span class="w"> </span>zpool<span class="w"> </span>list
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>NAME<span class="w">    </span>SIZE<span class="w">  </span>ALLOC<span class="w">   </span>FREE<span class="w">  </span>CKPOINT<span class="w">  </span>EXPANDSZ<span class="w">   </span>FRAG<span class="w">    </span>CAP<span class="w">  </span>DEDUP<span class="w">    </span>HEALTH<span class="w">  </span>ALTROOT
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>zroot<span class="w">   </span>228G<span class="w">  </span><span class="m">5</span>.99G<span class="w">   </span>222G<span class="w">        </span>-<span class="w">         </span>-<span class="w">     </span><span class="m">0</span>%<span class="w">     </span><span class="m">2</span>%<span class="w">  </span><span class="m">1</span>.00x<span class="w">    </span>ONLINE<span class="w">  </span>-
-</span></code></pre></div>
-<ol>
-<li>We'll create a snapshot of the zroot dataset. <code>sudo zfs snapshot -r DATASET@NAME</code>. Note the <code>-r</code> flag. This will create a snapshot of the dataset and all of its children. We'll run this initially and every subsequent snapshot you can exlude this flag.</li>
-</ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">[</span>troy@nixos:~<span class="o">]</span>$<span class="w"> </span>sudo<span class="w"> </span>zfs<span class="w"> </span>snapshot<span class="w"> </span>-r<span class="w"> </span>zroot@nixos_base
-</span></code></pre></div>
-<ol>
-<li>You can view the snapshots using <code>zfs list -t snapshot</code></li>
-</ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">[</span>troy@nixos:~<span class="o">]</span>$<span class="w"> </span>zfs<span class="w"> </span>list<span class="w"> </span>-t<span class="w"> </span>snapshot
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>NAME<span class="w">                    </span>USED<span class="w">  </span>AVAIL<span class="w">  </span>REFER<span class="w">  </span>MOUNTPOINT
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>zroot@nixos_base<span class="w">          </span>0B<span class="w">      </span>-<span class="w">    </span>96K<span class="w">  </span>-
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>zroot/root@nixos_base<span class="w">    </span>56K<span class="w">      </span>-<span class="w">  </span><span class="m">5</span>.98G<span class="w">  </span>-
-</span></code></pre></div>
+<h1 id="installing-ansible-on-windows-through-wsl">Installing Ansible on Windows through WSL</h1>
+<p>Requirements: WSL is already setup. Do all the steps below inside the WSL instance</p>
 <ol>
 <li>
-<p>On my TrueNAS system I'll do the same <code>zpool list</code>. We'll send the snapshot to <code>Pool0</code>
-</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>admin@truenas<span class="o">[</span>~<span class="o">]</span>$<span class="w"> </span>sudo<span class="w"> </span>zpool<span class="w"> </span>list
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>NAME<span class="w">        </span>SIZE<span class="w">  </span>ALLOC<span class="w">   </span>FREE<span class="w">  </span>CKPOINT<span class="w">  </span>EXPANDSZ<span class="w">   </span>FRAG<span class="w">    </span>CAP<span class="w">  </span>DEDUP<span class="w">    </span>HEALTH<span class="w">  </span>ALTROOT
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Pool0<span class="w">      </span><span class="m">2</span>.72T<span class="w">   </span>277G<span class="w">  </span><span class="m">2</span>.45T<span class="w">        </span>-<span class="w">         </span>-<span class="w">     </span><span class="m">0</span>%<span class="w">     </span><span class="m">9</span>%<span class="w">  </span><span class="m">1</span>.00x<span class="w">    </span>ONLINE<span class="w">  </span>/mnt
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>SSD0<span class="w">        </span>111G<span class="w">  </span><span class="m">1</span>.28M<span class="w">   </span>111G<span class="w">        </span>-<span class="w">         </span>-<span class="w">     </span><span class="m">0</span>%<span class="w">     </span><span class="m">0</span>%<span class="w">  </span><span class="m">1</span>.00x<span class="w">    </span>ONLINE<span class="w">  </span>/mnt
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>boot-pool<span class="w">   </span>102G<span class="w">  </span><span class="m">2</span>.41G<span class="w">  </span><span class="m">99</span>.6G<span class="w">        </span>-<span class="w">         </span>-<span class="w">     </span><span class="m">0</span>%<span class="w">     </span><span class="m">2</span>%<span class="w">  </span><span class="m">1</span>.00x<span class="w">    </span>ONLINE<span class="w">  </span>-
+<p>Install Ansible &amp; sshpass: <code>pip install ansible</code> &amp; <code>sudo apt install sshpass</code></p>
+</li>
+<li>
+<p>Generate SSH Keys and Copy:
+    </p><div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt;<span class="w"> </span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>rsa<span class="w"> </span>-b<span class="w"> </span><span class="m">4096</span><span class="w"> </span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>&gt;<span class="w"> </span>ssh-copy-id<span class="w"> </span><span class="o">{</span>username<span class="o">}</span>@<span class="o">{</span>remote_server_ip<span class="o">}</span>
 </span></code></pre></div><p></p>
 </li>
 <li>
-<p>We're not gonna send it over SSH like usual. We'll use Netcat (<code>nc</code>). This is fine for a local network but you should use other methods if you're sending it over the internet.</p>
-<p>On TrueNAS we'll run the server with the following command.
-</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nc<span class="w"> </span>-w<span class="w"> </span><span class="m">120</span><span class="w"> </span>-l<span class="w"> </span>-p<span class="w"> </span><span class="m">8023</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>zfs<span class="w"> </span>receive<span class="w"> </span>Pool0/zfs_snapshots/nixos_<span class="k">$(</span>date<span class="w"> </span>+<span class="se">\%</span>Y-<span class="se">\%</span>m-<span class="se">\%</span>d<span class="k">)</span>
-</span></code></pre></div>
-6. Now on our main machine we'll run the following. <code>sudo zfs send zroot/root@nixos_base | nc -w 20 192.168.1.9 8023</code><p></p>
+<p>Create Playbook directory: <code>mkdir ansible_playbooks</code></p>
 </li>
 <li>
-<p>After some time, the snapshot should be in the TrueNAS UI; But we can also view it from the command line.</p>
+<p>Create Inventory file with the following:</p>
+<p>inventory.yml
+</p><div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p p-Indicator">[</span><span class="nv">debian_lxc</span><span class="p p-Indicator">]</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="l l-Scalar l-Scalar-Plain">192.168.1.173 ansible_ssh_user=root</span>
+</span></code></pre></div>
+5. Create playbook file with the follwing:<p></p>
+<p>test.yml
+</p><div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nn">---</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Example Playbook</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debian_lxc</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nt">tasks</span><span class="p">:</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Hello World</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">debug</span><span class="p p-Indicator">:</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Hello, world!</span>
+</span></code></pre></div><p></p>
+</li>
+<li>
+<p>Run the Playbook: <code>ansible-playbook -i inventory.ini test.yml</code></p>
 </li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>admin@truenas<span class="o">[</span>~<span class="o">]</span>$<span class="w"> </span>sudo<span class="w"> </span>zfs<span class="w"> </span>list<span class="w"> </span>-t<span class="w"> </span>snapshot
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>NAME<span class="w">                                              </span>USED<span class="w">  </span>AVAIL<span class="w">  </span>REFER<span class="w">  </span>MOUNTPOINT
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Pool0@manual-2024-08-09_19-10<span class="w">                     </span>133K<span class="w">      </span>-<span class="w">   </span>384K<span class="w">  </span>-
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Pool0@auto-2024-08-18_03-50<span class="w">                      </span><span class="m">95</span>.9K<span class="w">      </span>-<span class="w">   </span>384K<span class="w">  </span>-
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Pool0@auto-2024-08-25_03-50<span class="w">                      </span><span class="m">95</span>.9K<span class="w">      </span>-<span class="w">   </span>394K<span class="w">  </span>-
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>Pool0@auto-2024-09-01_03-50<span class="w">                      </span><span class="m">95</span>.9K<span class="w">      </span>-<span class="w">   </span>394K<span class="w">  </span>-
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Pool0/zfs_snapshots/nixos_2024-09-06@nixos_base<span class="w">   </span>917M<span class="w">      </span>-<span class="w">  </span><span class="m">9</span>.73G<span class="w">  </span>-
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>SSD0@manual-2024-08-09_19-10<span class="w">                        </span>0B<span class="w">      </span>-<span class="w">    </span>96K<span class="w">  </span>-
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>SSD0@auto-2024-08-18_03-50<span class="w">                          </span>0B<span class="w">      </span>-<span class="w">    </span>96K<span class="w">  </span>-
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>SSD0@auto-2024-08-25_03-50<span class="w">                          </span>0B<span class="w">      </span>-<span class="w">    </span>96K<span class="w">  </span>-
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>SSD0@auto-2024-09-01_03-50<span class="w">                          </span>0B<span class="w">      </span>-<span class="w">    </span>96K<span class="w">  </span>-
-</span></code></pre></div>
 
 
 
@@ -1564,7 +1534,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-custom" title="October 1, 2024 18:34:25 EDT"></span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-custom" title="January 2, 2026 05:38:38 EST"></span>
   </span>
 
     
@@ -1574,7 +1544,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-custom" title="October 1, 2024 18:34:25 EDT"></span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-custom" title="January 2, 2026 05:38:38 EST"></span>
   </span>
 
     
