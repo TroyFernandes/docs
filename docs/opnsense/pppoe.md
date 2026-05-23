@@ -25,7 +25,7 @@ After you plug in the cable from the ONT to your OPNsense box, you should have a
 
 The blogpost above has all the information, but the guide is for pfSense. I'll show you where the settings are in OPNSense. We'll only be doing the first few paragraphs of the guide.
 
-1. Go to the interface setup you created for PPPoE under(In my case I named it EBOX_PPPoE) under **Interfaces -> [EBOX_PPPoE]**
+1. Go to the interface setup you created for PPPoE under(In my case I named it EBOX_PPPoE) under **Interfaces -> `EBOX_PPPoE`**
 2. Change IPv6 Configuration Type to: **DHCPv6**
 3. Under **DHCPv6 client configuration** change the following
     - Prefix delegation size: 56

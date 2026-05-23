@@ -43,7 +43,7 @@ services:
 
 ## TFTP Server & OPNsense Settings
 
-1. Install the TFTP server on OPNsense by going to [System] -> [Plugin] -> search for `tft`, and install `os-tftp`
+1. Install the TFTP server on OPNsense by going to `System` -> `Plugin` -> search for `tft`, and install `os-tftp`
 
 2. The server won't start unless the `/usr/local/tftp` directory exists, so create it.
 
@@ -55,9 +55,9 @@ services:
     - netboot.xyz.efi
     - netboot.xyz.kpxe
 
-4. Add your netboot server to your DHCP server by going to [Services] -> [ISC DHCPv4] -> [Interface] -> [Network booting].
+4. Add your netboot server to your DHCP server by going to `Services` -> `ISC DHCPv4` -> `Interface` -> `Network booting`.
 
-5. Add your netboot server under [Services] -> [ISC DHCPv4] -> [Interface] -> [TFTP server].
+5. Add your netboot server under `Services` -> `ISC DHCPv4` -> `Interface` -> `TFTP server`.
 
 ![opnsense dhcp server](../resources/netbootxyz/opnsense-netbootxyz-settings.png)
 
