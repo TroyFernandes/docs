@@ -34,7 +34,17 @@ First things to do when setting up a new VPS. For this example, I'm using a VPS 
     > sudo service ssh restart
     ```
 
-8. Install unattended-upgrades:
+8. Change default SSH Port (something < 1024)
+
+    ```
+    > sudo nano /etc/ssh/sshd_config
+
+    Change "#Port 22" from to "Port <SomePort>"
+
+    > sudo service ssh restart
+    ```
+
+9. Install unattended-upgrades:
 
     ```bash
     > sudo apt install unattended-upgrades
