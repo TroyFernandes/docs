@@ -1,6 +1,6 @@
 # docs
 
-built using [MkDocs](https://github.com/mkdocs/mkdocs).
+built using [Zensical](https://zensical.org/about/).
 
 Hosted on: [Github Pages](https://troyfernandes.github.io/docs/)
 

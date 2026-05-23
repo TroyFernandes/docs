@@ -1,9 +1,11 @@
 services:
-  mkdocs:
-    container_name: mkdocs-material
+  zensical:
+    container_name: docs
     restart: unless-stopped
-    build: .
+    image: zensical/zensical:latest
     ports:
       - "8005:8000"
     volumes:
       - ./:/docs
+    stdin_open: true
+    tty: true

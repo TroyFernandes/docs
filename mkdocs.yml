@@ -1,8 +1,6 @@
 site_name: docs
-#site_url: https://mkdocs.example.com/
-
 docs_dir: docs
-site_dir: /site
+site_dir: site
 
 theme:
   name: material
@@ -26,24 +24,17 @@ theme:
     - navigation.path
     - navigation.indexes
 
+
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
   - pymdownx.superfences
+  - admonition
+  - toc:
+      permalink: true
 
 plugins:
   - search
-  - git-revision-date-localized:
-      type: custom
-      custom_format: "%c"
-      timezone: America/Toronto
-      fallback_to_build_date: false
-      enable_creation_date: true
-      enable_git_follow: true
-  - drawio:
-      viewer_js: "https://viewer.diagrams.net/js/viewer-static.min.js"
-  - glightbox
+  - metadata
